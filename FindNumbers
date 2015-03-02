@@ -1,0 +1,27 @@
+package phonebook;
+
+import javax.swing.*;
+
+import java.awt.event.*;
+import java.util.List;
+
+@SuppressWarnings("serial")
+public class FindNumbers extends JMenuItem implements ActionListener {
+	private PhoneBook phoneBook;
+	private PhoneBookGUI gui;
+
+	public FindNumbers(PhoneBook phoneBook, PhoneBookGUI gui) {
+		super("Find Number(s)");
+		this.phoneBook = phoneBook;
+		this.gui = gui;
+		addActionListener(this);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		String name = JOptionPane.showInputDialog("Enter name");
+		List<String> s = phoneBook.findNumber(name);
+		if (s != null && !s.equals(new String())) {
+			gui.messageArea.append("Telefonnummer: " + s.toString() + "\n");
+		}
+	}
+}
