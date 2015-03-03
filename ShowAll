@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import java.awt.event.*;
 import java.util.LinkedList;
+import java.util.Set;
 
 @SuppressWarnings("serial")
 public class ShowAll extends JMenuItem implements ActionListener {
@@ -18,9 +19,9 @@ public class ShowAll extends JMenuItem implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		LinkedList<String> s = phoneBook.names();
-		if (s != null) {
-			gui.messageArea.append(s.toString());
+		Set<String> s = phoneBook.names();
+		if (!(new String("[]").equals(s.toString()))) {
+			gui.messageArea.append(s.toString() + "\n");
 		}
 	}
 }
