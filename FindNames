@@ -1,7 +1,6 @@
 package phonebook;
 
 import javax.swing.*;
-
 import java.awt.event.*;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class FindNames extends JMenuItem implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String number = JOptionPane.showInputDialog("Enter number");
 		List<String> s = phoneBook.findNames(number);
-		if (s != null && !s.equals(new String())) {
+		if (s != null && !s.toString().equals(new String("[]"))) {
 			gui.messageArea.append("Personer med detta nummer: " + s.toString() + "\n");
 		}
 	}
