@@ -3,6 +3,7 @@ package phonebook;
 import java.io.Serializable;
 import java.util.*;
 
+@SuppressWarnings("serial")
 public class PhoneBook implements Serializable {
 	private Map<String, LinkedList<String>> phoneBook;
 
@@ -87,11 +88,7 @@ public class PhoneBook implements Serializable {
 	 * @return The list of names associated with the specified number
 	 */
 	public List<String> findNames(String number) {
-		if (number == null || number.equals(new String())) {
-			return null;
-		} else if (!phoneBook.containsValue(number)) {
-			return new LinkedList<String>();
-		} else {
+		if (number != null && !number.equals(new String())) {
 			LinkedList<String> names = new LinkedList<String>();
 			Set<String> list = phoneBook.keySet();
 			Iterator<String> itr = list.iterator();
@@ -101,8 +98,11 @@ public class PhoneBook implements Serializable {
 					names.add(name);
 				}
 			}
-			return names;
+			if (names != null && !names.equals(new String())) {
+				return names;
+			}
 		}
+		return new LinkedList<String>();
 	}
 
 	/**
@@ -113,9 +113,11 @@ public class PhoneBook implements Serializable {
 	 */
 
 	public Set<String> names() {
-		return phoneBook.keySet();
+		TreeMap<String, LinkedList<String>> sortedMap = new TreeMap<String, LinkedList<String>>();
+		sortedMap.putAll(phoneBook);
+		return sortedMap.keySet();
 	}
-
+	
 	/**
 	 * Returns true if this phone book is empty
 	 * 
